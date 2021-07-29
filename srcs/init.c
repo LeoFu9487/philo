@@ -6,36 +6,16 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:28:14 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:34:57 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/29 17:57:44 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*
-typedef struct s_philo
+void	init(void)
 {
-	pthread_t		pthread;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
-}t_philo;
+	int	i;
 
-typedef struct s_data
-{
-	t_philo			*philo;
-	int				number_of_philosophers;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				number_of_times_to_eat;
-	int				program_end;
-	pthread_mutex_t	display_lock;
-	pthread_mutex_t	increment_lock;
-}t_data;
-*/
-
-void    init(void)
-{
 	g_data.philo = malloc(g_data.number_of_philosophers * sizeof(t_philo));
 	if (!g_data.philo)
 	{
@@ -43,5 +23,15 @@ void    init(void)
 		return ;
 	}
 	g_data.program_end = 0;
-	// todo (init phios, locks)
+	i = -1;
+	while (++i < g_data.number_of_philosophers)
+	{
+		pthread_mutex_init(&g_data.philo[i].right_fork, NULL);
+		if (g_data.number_of_philosophers == 1)
+			break ;
+		g_data.philo[i].left_fork = &(g_data.philo[(i + 1)
+			% g_data.number_of_philosophers].right_fork);
+	}
+	pthread_mutex_init(&g_data.display_lock, NULL);
+	pthread_mutex_init(&g_data.increment_lock, NULL);
 }

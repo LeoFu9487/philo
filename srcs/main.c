@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:55:31 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:35:12 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/29 17:58:59 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	main(int ac, char **av)
 	if (parse(ac, av))
 		return (1);
 	init();
-	(void)ac;
-	(void)av;
+	
 	// pthread_t	t[100];
 
 	// for (int i = 0 ; i < 100 ; ++i)

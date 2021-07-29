@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:55:56 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:32:08 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/29 17:53:13 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 typedef struct s_philo
 {
 	pthread_t		pthread;
-	pthread_mutex_t	left_fork;
+	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
 }t_philo;
 

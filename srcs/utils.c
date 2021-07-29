@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:05:40 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:27:05 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/29 17:52:08 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	ft_putstd_fd(char *str, int fd)
 {
 	if (!str || fd < 0)
 		return ;
+	pthread_mutex_lock(&g_data.display_lock);
 	write(fd, str, ft_strlen(str));
+	pthread_mutex_unlock(&g_data.display_lock);
 }
 
 unsigned int	get_current_time_in_ms(void)
