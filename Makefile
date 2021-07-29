@@ -1,10 +1,10 @@
 NAME = philo
 
-CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=address -g3
 
 CC = gcc
 
-SRCS_FILE = main.c
+SRCS_FILE = main.c	utils.c	init.c	parse.c
 
 SRCS_PATH = srcs/
 

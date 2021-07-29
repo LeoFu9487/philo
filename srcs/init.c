@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 20:55:56 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:32:08 by yfu              ###   ########lyon.fr   */
+/*   Created: 2021/07/29 17:28:14 by yfu               #+#    #+#             */
+/*   Updated: 2021/07/29 17:34:57 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
-/*
-** allowed functions :
-** memset
-** printf
-** malloc
-** free
-** write
-** usleep
-** gettimeofday
-** pthread_create
-** pthread_detach
-** pthread_join
-** pthread_mutex_init
-** pthread_mutex_destroy
-** pthread_mutex_lock
-** pthread_mutex_unlock
-*/
-# include <string.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include <pthread.h>
+#include "philo.h"
 
+/*
 typedef struct s_philo
 {
 	pthread_t		pthread;
@@ -55,14 +32,16 @@ typedef struct s_data
 	pthread_mutex_t	display_lock;
 	pthread_mutex_t	increment_lock;
 }t_data;
+*/
 
-t_data	g_data;
-
-int					ft_strlen(char *str);
-void				ft_putstd_fd(char *str, int fd);
-void				ft_sleep(unsigned int ms);
-unsigned int		get_current_time_in_ms(void);
-void    			init(void);
-int					parse(int ac, char **av);
-
-#endif
+void    init(void)
+{
+	g_data.philo = malloc(g_data.number_of_philosophers * sizeof(t_philo));
+	if (!g_data.philo)
+	{
+		ft_putstd_fd("Error : malloc\n", 2);
+		return ;
+	}
+	g_data.program_end = 0;
+	// todo (init phios, locks)
+}
