@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=address -g3
 
 CC = gcc
 
-SRCS_FILE = main.c	utils.c	init.c	parse.c
+SRCS_FILE = main.c	utils.c	init.c	parse.c	routine.c
 
 SRCS_PATH = srcs/
 

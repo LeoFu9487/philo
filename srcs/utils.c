@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:05:40 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:52:08 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 09:22:59 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putstd_fd(char *str, int fd)
+void	ft_putstr_fd(char *str, int fd)
 {
 	if (!str || fd < 0)
 		return ;
@@ -39,7 +39,7 @@ unsigned int	get_current_time_in_ms(void)
 
 	if (gettimeofday(&current, NULL) < 0)
 	{
-		ft_putstd_fd("Error gettimeofday\n", 2);
+		ft_putstr_fd("Error: gettimeofday\n", 2);
 		return (-1);
 	}
 	return ((unsigned int)(current.tv_sec * 1000 + current.tv_usec / 1000));
@@ -57,4 +57,27 @@ void	ft_sleep(unsigned int ms)
 		while (!g_data.program_end && get_current_time_in_ms() - begin_time < ms)
 			usleep(1000);
 	}
+}
+
+/*
+** if error return -1
+*/
+int	ft_atoi(char *str)
+{
+	long long int	ans;
+
+	if (ft_strlen(str) < 1 || ft_strlen(str) > 10)
+		return (-1);
+	ans = 0LL;
+	while (*str)
+	{
+		if (*str >= '0' && *str <= '9')
+			ans = 10LL * ans + (long long int)(*str - '0');
+		else
+			return (-1);
+		++str;
+	}
+	if (ans > 2147483647LL)
+		return (-1);
+	return ((int)ans);
 }

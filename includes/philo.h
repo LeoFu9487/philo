@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:55:56 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:53:13 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 09:44:46 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@
 
 typedef struct s_philo
 {
-	pthread_t		pthread;
+	int				id;
+	pthread_t		thread_id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
 }t_philo;
@@ -58,11 +59,48 @@ typedef struct s_data
 
 t_data	g_data;
 
+/*___________________________________________________________________________*/
+/*
+** main.c
+*/
+
+int					create_thread(void);
+
+/*___________________________________________________________________________*/
+/*
+** utils.c
+*/
+
 int					ft_strlen(char *str);
-void				ft_putstd_fd(char *str, int fd);
+void				ft_putstr_fd(char *str, int fd);
 void				ft_sleep(unsigned int ms);
+int					ft_atoi(char *str);
 unsigned int		get_current_time_in_ms(void);
-void    			init(void);
+
+/*___________________________________________________________________________*/
+
+/*
+** init.c
+*/
+
+int		   			init(void);
+
+/*___________________________________________________________________________*/
+
+/*
+** parse.c
+*/
+
 int					parse(int ac, char **av);
+
+/*___________________________________________________________________________*/
+
+/*
+** routine.c
+*/
+
+void				*routine(void *ptr);
+
+/*___________________________________________________________________________*/
 
 #endif

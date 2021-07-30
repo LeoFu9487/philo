@@ -6,33 +6,39 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:55:31 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/29 17:58:59 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 09:45:27 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void*	func(void *p)
+/*
+** IF error return -1, else return 0
+*/
+int	create_thread(void)
 {
-	sleep(rand() % 5);
-	printf("%d\n",*(int *)p);
-	return (NULL);
+	int	i;
+
+	i = -1;
+	while (++i < g_data.number_of_philosophers)
+		if (pthread_create(&g_data.philo[i].thread_id, NULL, routine, &g_data.philo[i]))
+		{
+			ft_putstr_fd("Error: pthread_createn\n", 2);
+			return (-1);
+		}
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
 	if (parse(ac, av))
+	{
+		ft_putstr_fd("Error: arguments\n", 2);
 		return (1);
-	init();
-	
-	// pthread_t	t[100];
-
-	// for (int i = 0 ; i < 100 ; ++i)
-	// {
-	// 	pthread_create(&(t[i]), NULL, &func, &i);
-	// }
-	// for (int i = 0 ; i < 100 ; ++i)
-	// {
-	// 	pthread_join(t[i], NULL);
-	// }
+	}
+	if (init() || create_thread())
+		return (1);
+	return (0);
 }
+
+// remember to free + destroy locks
