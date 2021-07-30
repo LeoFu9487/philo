@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   set_program_end.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/30 13:26:23 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 15:48:32 by yfu              ###   ########lyon.fr   */
+/*   Created: 2021/07/30 14:43:14 by yfu               #+#    #+#             */
+/*   Updated: 2021/07/30 16:17:50 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	exit_free(void)
+void	*set_program_end(void *ptr)
 {
-	int	i;
+	t_philo	*philo;
 
-	i = -1;
-	while (++i < g_data.number_of_philosophers)
+	philo = (t_philo *)ptr;
+	while (!g_data.program_end)
 	{
-		if (pthread_join(g_data.philo[i].thread_id, NULL))
+		if (g_data.number_of_full_philosophers == g_data.number_of_philosophers)
 		{
-			ft_putstr_fd("Error: pthread_join\n", 2);
-			return ;
+			ft_putstr_fd("Everybody is full now\n", 2);
+			g_data.program_end = 1;
 		}
-		pthread_mutex_destroy(&g_data.philo[i].right_fork);
+		else if (get_current_time_in_ms() - philo->last_time_to_eat >= (unsigned int)g_data.time_to_die)
+		{
+			ft_putstr_fd("Somebody died\n", 2);
+			g_data.program_end = 1;
+		}
 	}
-	free(g_data.philo);
-	pthread_mutex_destroy(&g_data.increment_lock);
-	pthread_mutex_destroy(&g_data.display_lock);
+	return (NULL);
 }

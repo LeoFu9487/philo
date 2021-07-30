@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:31:07 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 09:12:31 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 14:40:54 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	parse(int ac, char **av)
 	g_data.time_to_sleep = ft_atoi(av[4]);
 	if (g_data.number_of_philosophers < 0 || g_data.time_to_die < 0
 		|| g_data.time_to_eat < 0 || g_data.time_to_sleep < 0)
-			return (-1);
+		return (-1);
 	return (0);
 }

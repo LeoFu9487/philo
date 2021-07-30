@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:55:56 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 13:28:23 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 16:15:47 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,20 @@ typedef struct s_philo
 	pthread_t		thread_id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
+	unsigned int	last_time_to_eat;
 }t_philo;
 
 typedef struct s_data
 {
 	t_philo			*philo;
+	int				meal_eaten;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_times_to_eat;
 	int				program_end;
+	int				number_of_full_philosophers;
 	pthread_mutex_t	display_lock;
 	pthread_mutex_t	increment_lock;
 }t_data;
@@ -83,7 +86,7 @@ unsigned int		get_current_time_in_ms(void);
 ** init.c
 */
 
-int		   			init(void);
+int					init(void);
 
 /*___________________________________________________________________________*/
 
@@ -108,6 +111,14 @@ void				*routine(void *ptr);
 */
 
 void				exit_free(void);
+
+/*___________________________________________________________________________*/
+
+/*
+** check_and_set_program_end.c
+*/
+
+void				*set_program_end(void *ptr);
 
 /*___________________________________________________________________________*/
 

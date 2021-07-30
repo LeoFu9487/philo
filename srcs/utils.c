@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:05:40 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 09:22:59 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 15:51:28 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	if (!str)
 		return (0);
@@ -29,7 +29,8 @@ void	ft_putstr_fd(char *str, int fd)
 	if (!str || fd < 0)
 		return ;
 	pthread_mutex_lock(&g_data.display_lock);
-	write(fd, str, ft_strlen(str));
+	if (!g_data.program_end)
+		write(fd, str, ft_strlen(str));
 	pthread_mutex_unlock(&g_data.display_lock);
 }
 
@@ -54,7 +55,8 @@ void	ft_sleep(unsigned int ms)
 	else
 	{
 		begin_time = get_current_time_in_ms();
-		while (!g_data.program_end && get_current_time_in_ms() - begin_time < ms)
+		while ((!g_data.program_end) && get_current_time_in_ms()
+			- begin_time < ms)
 			usleep(1000);
 	}
 }
