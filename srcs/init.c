@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:28:14 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 16:16:00 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 16:54:52 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	init(void)
 {
 	int	i;
 
+	g_data.start_time = get_current_time_in_ms();
 	g_data.number_of_full_philosophers = 0;
 	g_data.philo = malloc(g_data.number_of_philosophers * sizeof(t_philo));
 	if (!g_data.philo)
@@ -37,7 +38,7 @@ int	init(void)
 	while (++i < g_data.number_of_philosophers)
 	{
 		g_data.philo[i].id = i + 1;
-		g_data.meal_eaten = 0;
+		g_data.philo[i].meal_eaten = 0;
 		if (mutex_init(&g_data.philo[i].right_fork))
 			return (-1);
 		if (g_data.number_of_philosophers == 1)

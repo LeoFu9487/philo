@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 17:05:40 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 15:51:28 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 16:47:17 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_sleep(unsigned int ms)
 		begin_time = get_current_time_in_ms();
 		while ((!g_data.program_end) && get_current_time_in_ms()
 			- begin_time < ms)
-			usleep(1000);
+			usleep(10000);
 	}
 }
 

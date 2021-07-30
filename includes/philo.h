@@ -6,7 +6,7 @@
 /*   By: yfu <yfu@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:55:56 by yfu               #+#    #+#             */
-/*   Updated: 2021/07/30 16:15:47 by yfu              ###   ########lyon.fr   */
+/*   Updated: 2021/07/30 16:56:53 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 typedef struct s_philo
 {
 	int				id;
+	int				meal_eaten;
 	pthread_t		thread_id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
@@ -48,7 +49,7 @@ typedef struct s_philo
 typedef struct s_data
 {
 	t_philo			*philo;
-	int				meal_eaten;
+	unsigned		start_time;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
@@ -71,7 +72,7 @@ int					create_thread(void);
 
 /*___________________________________________________________________________*/
 /*
-** utils.c
+** utils.c, utils2.c
 */
 
 int					ft_strlen(char *str);
@@ -79,6 +80,8 @@ void				ft_putstr_fd(char *str, int fd);
 void				ft_sleep(unsigned int ms);
 int					ft_atoi(char *str);
 unsigned int		get_current_time_in_ms(void);
+void				ft_putnbr_fd(int num, int fd);
+void				ft_putstat(t_philo *philo, char *action);
 
 /*___________________________________________________________________________*/
 
